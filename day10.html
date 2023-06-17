@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            JS Operations
+        </title>
+    </head>
+    <script>
+        function sum(...theArgs)
+        {
+            return theArgs.reduce((previous, current) =>
+            {
+                return previous + current;
+            })
+        }
+        const sumNumbers = (...numbers) => {
+            let sum = 0;
+            for(let num of numbers)
+            {
+                sum += num;
+            }
+            return sum;
+        };
+        const concatenateStrings = (...strings) => {
+            return strings.join(' ');
+        }; 
+        function spread(){
+            // used to combine one element to an array of another
+            const numbers = [1,2,3,4,5];
+            console.log(...numbers);
+            const array1 = [1,2,3];
+            const array2 = [4,5,6];
+            document.getElementById('ans').innerHTML += "<br>"+array1+"<br>"+array2;
+            const combined_array = [...array1, ...array2];
+            document.getElementById('ans').innerHTML += "<br><br>"+combined_array;
+        }
+
+        // IIFE function not able to perform calls on it. Output is on Console
+        (function pak(string) {
+            return string.split(' ')
+            .map(word => string[0])
+            .join('_');
+        })("This is an Immediately Invoked Function Expression")
+
+        const f1 = (x, y) => {return x*y};
+        function fun(a,b,c)
+        {
+            console.log(arguments[0]);
+            console.log(arguments[1]);
+            console.log(arguments[2]);
+            return 7+8+9
+        }
+        // Recursive Function
+        function factorial(x)
+        {
+            if(x == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return x * factorial(x-1);
+            }
+        }
+        // Memorized Function Output in Console
+        const fib = (n,memo) => {
+            console.log(memo);
+            memo = memo || {}
+            if(memo[n])
+            {
+                return memo[n];
+            }
+            if(n <= 1)
+            {
+                return 1;
+            }
+            return memo[n] = fib(n-1, memo)+fib(n-2, memo);
+            
+        }
+
+        function print()
+        {   
+            let x = fun(7,8,9);
+            let y = sum(1,2,3,4);
+            let z = sum(5,10,15);
+            let aa = sumNumbers(4,5,6,7,8);
+            let ab = concatenateStrings("These","are the","answers of","different methods");
+            document.getElementById('ans').innerHTML = ab+"<br>"+x+" "+y+" "+z+" "+aa;
+            document.getElementById('ans').innerHTML += "<br>"
+            spread();
+
+
+            //Array Methods
+            const arr = [1,2,3,4,5,6];
+            document.getElementById('poo').innerHTML = arr;
+            document.getElementById('poo').innerHTML += "<br>"+arr.map((a) => {return a+2});
+            document.getElementById('poo').innerHTML += "<br>"+arr.filter((a) => a%2==0);
+            document.getElementById('poo').innerHTML += "<br>"+arr.filter((a) => a%2!=0);
+
+
+            // Anonymus function
+            const pee = function(x){return x+5};
+            document.getElementById('poo').innerHTML += "<br><br>"+pee(5);
+            document.getElementById('poo').innerHTML += "<br>"+f1(4,6);
+
+            document.getElementById('poo').innerHTML += "<br>"+factorial(5);
+            document.getElementById('poo').innerHTML += "<br>"+fib(10);
+        }
+
+        // Callbacks
+        function foo(callback)
+        {
+            callback();
+        }
+        foo(function bar()
+        {
+            console.log('foo.bar');
+        });
+        foo( function baz()
+        {
+            console.log('foo.baz');
+        });
+
+        try
+        {
+            (function goToTheScaffold()
+            {
+                let whiteRabbit = "\u{0001F407}";
+                throw "I can't do this";
+                console.log(whiteRabbit);
+            })();
+        }
+        catch
+        {
+            console.log("Trinity removes the bug");
+        }
+        finally
+        {
+            console.log("Got the red pill");
+        }
+        console.log("Welcome to the real world")
+
+    </script>
+    <button onclick="print()">Click Me</button><br><br>
+    Output 1:<p id="ans"></p>
+    <br><br><br>
+    Output 2:
+    <p id="poo">
+
+    </p>
+</html> 
